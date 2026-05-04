@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: veterinaria-backend
+
+  datasource:
+    # URL con currentSchema para apuntar directamente a tu esquema personalizado
+    url: jdbc:postgresql://localhost:5432/tu_base_datos?currentSchema=veterinaria
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      # En producción usar 'validate', para desarrollo 'update'
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        # Forzar el esquema por defecto en todas las consultas de Hibernate
+        default_schema: veterinaria
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: UTC
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
