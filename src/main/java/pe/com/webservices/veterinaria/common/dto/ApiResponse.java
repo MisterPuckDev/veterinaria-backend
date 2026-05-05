@@ -1,16 +1,39 @@
 package pe.com.webservices.veterinaria.common.dto;
 
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record ApiResponse <T>(
+/**
+ * Estructura unificada para todas las respuestas de la API.
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApiResponse<T> {
 
-        boolean sucess,
-        String message,
-        T data,
-        LocalDateTime localDateTime
-) {
+    private boolean success;
+    private String message;
+    private T data;
+    private int code;
 
-    public ApiResponse(boolean sucess, String message, T data) {
-        this(sucess, message, data, LocalDateTime.now());
+    public static <T> ApiResponse<T> success(T data, String message) {
+        return ApiResponse.<T>builder()
+                .success(true)
+                .message(message)
+                .data(data)
+                .code(200)
+                .build();
     }
+
+    public static <T> ApiResponse<T> error(String message, int code) {
+        return ApiResponse.<T>builder()
+                .success(false)
+                .message(message)
+                .code(code)
+                .build();
+    }
+
 }
