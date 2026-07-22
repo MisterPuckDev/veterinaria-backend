@@ -9,9 +9,9 @@ spring:
 
   datasource:
     # URL con currentSchema para apuntar directamente a tu esquema personalizado
-    url: jdbc:postgresql://localhost:5432/tu_base_datos?currentSchema=veterinaria
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:admin}
+    url: jdbc:postgresql://localhost:5432/veterinaria_db?currentSchema=veterinaria
+    username: ${DB_USERNAME:admin-vet}
+    password: ${DB_PASSWORD:123456}
     driver-class-name: org.postgresql.Driver
 
   jpa:
